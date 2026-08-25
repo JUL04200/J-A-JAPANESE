@@ -228,8 +228,17 @@
       els.debugPanel.addEventListener('click', (e) => {
         const btn = e.target.closest('button[data-force]');
         if (!btn) return;
-        TEST_MODE = btn.dataset.force;
-        location.reload();
+        // On repart d'une vraie navigation avec le paramètre ?test= dans l'URL
+        // (un simple TEST_MODE + location.reload() serait perdu au rechargement,
+        // puisque tout l'état JS repart de zéro et se relit depuis l'URL).
+        const url = new URL(window.location.href);
+        if (btn.dataset.force === 'auto') {
+          url.searchParams.delete('test');
+        } else {
+          url.searchParams.set('test', btn.dataset.force);
+        }
+        url.searchParams.set('debug', '1');
+        window.location.href = url.toString();
       });
     }
   }

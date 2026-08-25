@@ -19,6 +19,16 @@
 </head>
 <body data-state="loading">
 
+<!-- Animation d'ouverture : brume + cercle Enso, jouée à l'arrivée sur le site -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-fog"></div>
+  <div class="intro-fog intro-fog--2"></div>
+  <svg class="intro-enso" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="82" fill="none" stroke="#f6f1e6" stroke-width="1.6" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
+  </svg>
+  <p class="intro-kanji">日本</p>
+</div>
+
 <!-- Toile de fond : pétales de sakura / brume, très légers -->
 <canvas id="petals" aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>

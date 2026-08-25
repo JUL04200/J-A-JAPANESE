@@ -67,6 +67,78 @@ canvas#petals {
   pointer-events: none;
 }
 
+/* ===========================================================
+   ANIMATION D'OUVERTURE (à l'arrivée sur le site)
+   =========================================================== */
+
+body.intro-lock { overflow: hidden; height: 100%; }
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--ink);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s var(--ease-elegant), visibility 1.2s linear;
+}
+.intro.intro-hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-fog {
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(ellipse 55% 40% at 30% 40%, rgba(246,241,230,.18), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 75% 60%, rgba(246,241,230,.14), transparent 70%);
+  filter: blur(18px);
+  animation: intro-fog-drift 6s ease-in-out infinite alternate;
+}
+.intro-fog--2 {
+  animation-duration: 8s;
+  animation-direction: alternate-reverse;
+  opacity: .65;
+}
+@keyframes intro-fog-drift {
+  0%   { transform: translate(-4%, 0) scale(1); }
+  100% { transform: translate(4%, -3%) scale(1.08); }
+}
+
+.intro-enso {
+  position: relative;
+  z-index: 1;
+  width: min(180px, 45vw);
+}
+.intro-enso circle {
+  transition: stroke-dasharray 1.8s var(--ease-elegant) .25s;
+}
+.intro.intro-draw .intro-enso circle { stroke-dasharray: 88 100; }
+
+.intro-kanji {
+  position: absolute;
+  bottom: 36%;
+  font-family: var(--serif-jp);
+  font-weight: 500;
+  color: var(--cream);
+  font-size: 1.05rem;
+  letter-spacing: .5em;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1s var(--ease-elegant) 1.1s;
+}
+.intro.intro-draw .intro-kanji { opacity: .8; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+}
+
 ::selection { background: var(--red); color: var(--cream); }
 
 a { color: inherit; text-decoration: none; }

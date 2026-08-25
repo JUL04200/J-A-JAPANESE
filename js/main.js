@@ -350,6 +350,39 @@
   }
 
   /* -----------------------------------------------------------
+     Animation d'ouverture (brume + cercle Enso) à l'arrivée sur le site.
+     Jouée une seule fois par session (sessionStorage) pour ne pas gêner
+     un invité qui recharge ou navigue plusieurs fois pendant la soirée.
+  ----------------------------------------------------------- */
+
+  const INTRO_SESSION_KEY = 'jaIntroPlayed';
+
+  function initIntro() {
+    const intro = document.getElementById('intro');
+    if (!intro) return;
+
+    let alreadyPlayed = false;
+    try { alreadyPlayed = sessionStorage.getItem(INTRO_SESSION_KEY) === '1'; } catch (e) { /* stockage indisponible : on rejoue à chaque fois, tant pis */ }
+
+    if (reduceMotion || alreadyPlayed) {
+      intro.remove();
+      return;
+    }
+
+    body.classList.add('intro-lock');
+    requestAnimationFrame(() => intro.classList.add('intro-draw'));
+
+    setTimeout(() => {
+      intro.classList.add('intro-hide');
+      body.classList.remove('intro-lock');
+    }, 2600);
+
+    setTimeout(() => intro.remove(), 3900);
+
+    try { sessionStorage.setItem(INTRO_SESSION_KEY, '1'); } catch (e) { /* pas grave si indisponible */ }
+  }
+
+  /* -----------------------------------------------------------
      Musique d'ambiance — jamais de lecture automatique.
      Nappe sonore générative douce (aucun fichier externe requis).
      Pour utiliser un vrai enregistrement, placer un fichier dans
@@ -453,6 +486,7 @@
   ----------------------------------------------------------- */
 
   document.addEventListener('DOMContentLoaded', () => {
+    initIntro();
     initScrollReveal(); // pose les attributs data-observe avant init()
     init();
     initPetalsCanvas();

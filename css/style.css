@@ -657,15 +657,6 @@ body.menu-visible .menu-section { display: block; }
   margin: 0;
   font-size: 1rem;
 }
-.dish-note {
-  margin: .7rem 0 0;
-  font-family: var(--serif-jp);
-  font-size: .68rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--red);
-}
-
 .menu-course--main .dish--main {
   border: none;
   background: linear-gradient(180deg, rgba(185,151,90,.08), transparent);

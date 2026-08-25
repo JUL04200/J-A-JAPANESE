@@ -15,7 +15,7 @@
      afin que la révélation se déclenche à la bonne heure pour
      TOUS les invités, quel que soit le fuseau de leur téléphone.
   ----------------------------------------------------------- */
-  const REVEAL_DATE = "2026-08-25T10:24:00+02:00"; // <-- changer ici la date/heure de la soirée
+  const REVEAL_DATE = "2026-08-28T20:30:00+02:00"; // <-- changer ici la date/heure de la soirée
 
   /* Mode test : 'auto' | 'before' | 'after'
      - 'auto'   : utilise l'heure réelle comparée à REVEAL_DATE (comportement normal)

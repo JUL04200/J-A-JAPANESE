@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Jules Arrouasse — Japanese Night</title>
+<meta name="description" content="Une soirée japonaise privée. Le menu se révèle à 20h30.">
+<meta name="theme-color" content="#f6f1e6">
+
+<!-- Favicon : marque Enso + soleil, en SVG inline (aucune dépendance externe) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='42' r='8' fill='%23a3272c'/%3E%3Cpath d='M50 15a35 35 0 1 1 -24.7 59.7' fill='none' stroke='%231a1613' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Polices : serif élégante (titres) + accents + glyphes japonais -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;500;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-state="loading">
+
+<!-- Toile de fond : pétales de sakura / brume, très légers -->
+<canvas id="petals" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Bouton musique d'ambiance : jamais de lecture automatique -->
+<button id="music-toggle" class="music-btn" aria-pressed="false" aria-label="Activer la musique d'ambiance">
+  <svg viewBox="0 0 24 24" class="icon-on" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16 8a5 5 0 0 1 0 8" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M18.5 5.5a9 9 0 0 1 0 13" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".6"/></svg>
+  <svg viewBox="0 0 24 24" class="icon-off" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l4 4m0-4l-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+</button>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 220 220" class="logo-svg">
+        <!-- Cercle Enso -->
+        <circle class="enso-ring" cx="110" cy="112" r="92" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" pathLength="100" stroke-dasharray="88 100" transform="rotate(-108 110 112)"/>
+        <!-- Soleil rouge -->
+        <circle cx="110" cy="70" r="12" fill="#a3272c"/>
+        <!-- Mont Fuji -->
+        <path d="M60 132 L92 78 L104 96 L118 70 L160 132 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M105 92 L118 70 L131 92 L124 92 L118 82 L112 92 Z" fill="currentColor" opacity=".85"/>
+        <!-- Branche de sakura -->
+        <path d="M46 150 Q80 142 100 150 T150 150" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".7"/>
+        <g fill="#a3272c" opacity=".9">
+          <circle cx="70" cy="147" r="2.6"/>
+          <circle cx="88" cy="153" r="2.2"/>
+          <circle cx="112" cy="148" r="2.4"/>
+          <circle cx="132" cy="152" r="2"/>
+        </g>
+        <!-- Monogramme JA -->
+        <text x="110" y="182" text-anchor="middle" class="logo-mono">J A</text>
+      </svg>
+    </div>
+
+    <h1 class="hero-title">JULES ARROUASSE</h1>
+    <p class="hero-jp">日本 <span class="dash">—</span> Japanese Night</p>
+    <p class="hero-tagline">Une soirée à découvrir, étape après étape.</p>
+
+    <a href="#timeline" class="hero-scroll" aria-label="Découvrir la soirée">
+      <span class="scroll-line"></span>
+      <span class="scroll-word">Défiler</span>
+    </a>
+  </div>
+  <div class="fuji-silhouette" aria-hidden="true"></div>
+</header>
+
+<!-- ============ TIMELINE ============ -->
+<section class="section" id="timeline">
+  <div class="section-inner">
+    <p class="eyebrow">Programme</p>
+    <h2 class="section-title">Déroulement de la soirée</h2>
+    <div class="brush-divider" aria-hidden="true">
+      <svg viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M2 12 Q60 2 150 10 T298 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </div>
+
+    <ol class="timeline">
+      <li class="timeline-item">
+        <span class="t-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M13 10h14l-2 14a5 5 0 0 1-5 4h0a5 5 0 0 1-5-4z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 10h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M20 28v5m-5 0h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <div class="t-content">
+          <p class="t-time">19h30 – 20h00</p>
+          <p class="t-label">Accueil &amp; Apéritif</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <span class="t-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="58 68"/><circle cx="20" cy="20" r="2.4" fill="currentColor"/></svg>
+        </span>
+        <div class="t-content">
+          <p class="t-time">20h30</p>
+          <p class="t-label">Révélation de la soirée</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <span class="t-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><ellipse cx="20" cy="24" rx="13" ry="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 22a11 5 0 0 0 22 0" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15 10l1 9m9-9l-1 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </span>
+        <div class="t-content">
+          <p class="t-time">21h00</p>
+          <p class="t-label">Entrée à table &amp; dégustation de l'entrée</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <span class="t-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M10 20c4-6 8-9 13-9 5 3 7 7 7 9s-2 6-7 9c-5 0-9-3-13-9z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="15" cy="18" r="1" fill="currentColor"/></svg>
+        </span>
+        <div class="t-content">
+          <p class="t-time">21h20</p>
+          <p class="t-label">Plat principal</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <span class="t-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M12 16c0-4 3.5-7 8-7s8 3 8 7" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="10" y="16" width="20" height="4" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 20l1 7a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </span>
+        <div class="t-content">
+          <p class="t-time">21h50</p>
+          <p class="t-label">Dessert</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PORTE / MYSTÈRE (avant révélation) ============ -->
+<section class="section gate" id="menu-gate">
+  <div class="fog-layer" aria-hidden="true"></div>
+  <div class="section-inner gate-inner">
+    <div class="gate-enso" aria-hidden="true">
+      <svg viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="66" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" pathLength="100" stroke-dasharray="86 100" transform="rotate(20 80 80)"/>
+      </svg>
+      <span class="gate-lock" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+      </span>
+    </div>
+
+    <p class="gate-eyebrow">Le menu est encore secret&hellip;</p>
+    <p class="gate-reveal-at">Révélation à 20h30</p>
+
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-lab">heures</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-lab">minutes</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-lab">secondes</span></div>
+    </div>
+
+    <p class="gate-patience">Patience&hellip; l'expérience commence bientôt.</p>
+  </div>
+</section>
+
+<!-- ============ ANIMATION DE RÉVÉLATION (overlay plein écran) ============ -->
+<div class="reveal-overlay" id="reveal-overlay" aria-hidden="true">
+  <div class="reveal-dim"></div>
+  <div class="reveal-fog"></div>
+  <svg class="reveal-enso" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="82" fill="none" stroke="#f6f1e6" stroke-width="2" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
+  </svg>
+  <div class="reveal-petals" aria-hidden="true"></div>
+  <p class="reveal-text">
+    <span class="jp">お楽しみください</span>
+    <span class="fr">— Bonne dégustation —</span>
+  </p>
+</div>
+
+<!-- ============ MENU (révélé) ============ -->
+<section class="section menu-section" id="menu">
+  <div class="section-inner">
+    <p class="eyebrow">La Carte</p>
+    <h2 class="section-title">Menu de la soirée</h2>
+    <div class="brush-divider" aria-hidden="true">
+      <svg viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M2 10 Q60 18 150 8 T298 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="menu-course">
+      <p class="course-label">Entrées</p>
+
+      <article class="dish">
+        <h3 class="dish-name">Tartare de saumon croustillant en feuille de riz</h3>
+        <p class="dish-detail">Avocat &middot; sésame &middot; sauce japonaise</p>
+        <p class="dish-note">Servi sous cloche fumée</p>
+      </article>
+
+      <article class="dish">
+        <h3 class="dish-name">Poke de saumon dans sa mangue</h3>
+        <p class="dish-detail">Mangue &middot; avocat &middot; sauce japonaise</p>
+      </article>
+    </div>
+
+    <div class="menu-course menu-course--main">
+      <p class="course-label">Plat</p>
+      <article class="dish dish--main">
+        <h3 class="dish-name">Cabillaud mariné au miso</h3>
+        <p class="dish-detail">Riz japonais &middot; pak-choï au sésame</p>
+      </article>
+    </div>
+
+    <div class="menu-course">
+      <p class="course-label">Dessert</p>
+      <article class="dish">
+        <h3 class="dish-name">Pain perdu brioché au chocolat</h3>
+        <p class="dish-detail">Sésame noir</p>
+      </article>
+    </div>
+
+    <a href="#timeline" class="btn btn--ghost">Déroulement de la soirée</a>
+  </div>
+</section>
+
+<!-- Bouton flottant : n'apparaît qu'après la révélation -->
+<a href="#menu" class="discover-btn" id="discover-btn">
+  <span>Découvrir le menu</span>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+
+<footer class="site-footer">
+  <button class="seal" id="seal" aria-label="Sceau de la soirée">
+    <svg viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" rx="6" fill="#a3272c"/><text x="30" y="26" text-anchor="middle" class="seal-jp">日本</text><text x="30" y="46" text-anchor="middle" class="seal-jp seal-jp--small">夜</text></svg>
+  </button>
+  <p class="footer-note">Jules Arrouasse &middot; Japanese Night</p>
+  <p class="easter-msg" id="easter-msg">Chef Jules vous souhaite une excellente soirée. 🇯🇵</p>
+</footer>
+
+<!-- Panneau de test (visible uniquement avec ?debug=1 dans l'URL) -->
+<div class="debug-panel" id="debug-panel" hidden>
+  <p>Mode test</p>
+  <button data-force="before">Avant 20h30</button>
+  <button data-force="after">Après 20h30</button>
+  <button data-force="auto">Heure réelle</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

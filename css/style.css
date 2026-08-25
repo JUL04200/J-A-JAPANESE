@@ -743,6 +743,11 @@ body.menu-visible .menu-section { display: block; }
   gap: .4rem;
   box-shadow: 0 8px 24px rgba(0,0,0,.35);
 }
+/* L'attribut HTML [hidden] doit rester prioritaire sur le display:flex
+   ci-dessus, sinon le panneau reste visible pour tout le monde même
+   sans ?debug=1 dans l'URL (et ses boutons, non initialisés par le JS
+   dans ce cas, semblent alors ne "rien faire" au clic). */
+.debug-panel[hidden] { display: none; }
 .debug-panel p { margin: 0 0 .2rem; letter-spacing: .1em; opacity: .7; }
 .debug-panel button {
   border: 1px solid var(--gold-soft);

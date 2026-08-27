@@ -56,6 +56,24 @@ pouvoir explorer la page tranquillement). Utilisez le panneau de debug ou
 `?test=after` pour voir le menu instantanément, ou laissez le mode `auto`
 (par défaut, sans paramètre) tourner en conditions réelles.
 
+- `?skipgate=1` → passe directement le filtre d'entrée (nom/prénom), pratique
+  pour tester sans retaper "Arrouasse" à chaque rechargement.
+
+## 🔒 Filtre d'entrée (nom / prénom)
+
+Avant même l'écran d'accueil, chaque visiteur doit indiquer son prénom et
+son nom. Seul le nom de famille **Arrouasse** (insensible à la casse et aux
+accents) débloque le site ; tout autre nom affiche un écran de refus avec un
+bouton "Sortez !".
+
+- Pour changer le nom de famille accepté, éditer `GATE_SURNAME` tout en haut
+  de la section correspondante dans `js/main.js`.
+- Le passage du filtre est mémorisé pour la session (`sessionStorage`) : un
+  invité qui recharge la page dans le même onglet n'a pas à le retaper.
+- Les visuels ("Bravo" / "Intrus") sont construits dans le style du site
+  (Enso, tampon encré, sceau rouge) plutôt qu'en images statiques, pour
+  rester légers et cohérents avec le reste de la page.
+
 ## Musique d'ambiance
 
 Le bouton en haut à droite active/coupe une nappe sonore douce générée

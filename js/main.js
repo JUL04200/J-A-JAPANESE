@@ -400,7 +400,7 @@
       const nom = nomInput.value;
 
       if (normalizeName(nom) === GATE_SURNAME) {
-        acceptedName.textContent = prenom || '';
+        acceptedName.textContent = prenom ? `Bienvenue, ${prenom}.` : '';
         showPanel(accepted);
       } else {
         rejected.classList.remove('gk-shake-once');

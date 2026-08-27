@@ -43,21 +43,14 @@
 
   <!-- Étape 2a : accès accordé -->
   <div class="gk-panel gk-result gk-accepted" id="gk-accepted" hidden>
-    <svg class="gk-enso" viewBox="0 0 200 200" aria-hidden="true">
-      <circle cx="100" cy="100" r="82" fill="none" stroke="#f6f1e6" stroke-width="1.6" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
-    </svg>
-    <p class="gk-seal" aria-hidden="true">侍</p>
-    <p class="gk-eyebrow gk-eyebrow--gold">Bravo <span id="gk-accepted-name"></span></p>
-    <h2 class="gk-title">Membre du clan Arrouasse</h2>
-    <p class="gk-sub">Tu es convié(e) à la Japanese Night.</p>
+    <img class="gk-poster" src="assets/gate-accepted.jpg" alt="Bravo, membre du clan Arrouasse — tu es accepté(e) à la Japanese Night">
+    <p class="gk-sub" id="gk-accepted-name"></p>
     <button type="button" class="gk-submit" id="gk-continue">Continuer</button>
   </div>
 
   <!-- Étape 2b : accès refusé -->
   <div class="gk-panel gk-result gk-rejected" id="gk-rejected" hidden>
-    <p class="gk-stamp" aria-hidden="true">Intrus</p>
-    <h2 class="gk-title gk-title--reject">Tu n'es pas accepté</h2>
-    <p class="gk-sub">Tu n'as pas été sélectionné pour la Japanese Night.</p>
+    <img class="gk-poster" src="assets/gate-rejected.jpg" alt="Intrus — tu n'as pas été sélectionné pour la Japanese Night">
     <button type="button" class="gk-out" id="gk-out">Sortez !</button>
     <button type="button" class="gk-retry" id="gk-retry">Ce n'est pas moi, réessayer</button>
   </div>

@@ -19,6 +19,50 @@
 </head>
 <body data-state="loading">
 
+<!-- ============ FILTRE D'ENTRÉE : nom / prénom ============
+     Bloque tout le reste du site tant que le visiteur n'a pas décliné son
+     identité. Le nom de famille "Arrouasse" donne accès ; sinon, la porte
+     reste close. -->
+<div class="gatekeeper" id="gatekeeper">
+  <div class="gk-fog" aria-hidden="true"></div>
+
+  <!-- Étape 1 : formulaire -->
+  <form class="gk-panel gk-form" id="gk-form" autocomplete="off">
+    <p class="gk-eyebrow">Accès privé</p>
+    <h2 class="gk-title">Qui êtes-vous ?</h2>
+    <div class="gk-field">
+      <label class="gk-label" for="gk-prenom">Prénom</label>
+      <input class="gk-input" id="gk-prenom" name="prenom" type="text" required autocapitalize="words">
+    </div>
+    <div class="gk-field">
+      <label class="gk-label" for="gk-nom">Nom</label>
+      <input class="gk-input" id="gk-nom" name="nom" type="text" required autocapitalize="words">
+    </div>
+    <button type="submit" class="gk-submit">Entrer</button>
+  </form>
+
+  <!-- Étape 2a : accès accordé -->
+  <div class="gk-panel gk-result gk-accepted" id="gk-accepted" hidden>
+    <svg class="gk-enso" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="82" fill="none" stroke="#f6f1e6" stroke-width="1.6" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
+    </svg>
+    <p class="gk-seal" aria-hidden="true">侍</p>
+    <p class="gk-eyebrow gk-eyebrow--gold">Bravo <span id="gk-accepted-name"></span></p>
+    <h2 class="gk-title">Membre du clan Arrouasse</h2>
+    <p class="gk-sub">Tu es convié(e) à la Japanese Night.</p>
+    <button type="button" class="gk-submit" id="gk-continue">Continuer</button>
+  </div>
+
+  <!-- Étape 2b : accès refusé -->
+  <div class="gk-panel gk-result gk-rejected" id="gk-rejected" hidden>
+    <p class="gk-stamp" aria-hidden="true">Intrus</p>
+    <h2 class="gk-title gk-title--reject">Tu n'es pas accepté</h2>
+    <p class="gk-sub">Tu n'as pas été sélectionné pour la Japanese Night.</p>
+    <button type="button" class="gk-out" id="gk-out">Sortez !</button>
+    <button type="button" class="gk-retry" id="gk-retry">Ce n'est pas moi, réessayer</button>
+  </div>
+</div>
+
 <!-- Animation d'ouverture : brume + cercle Enso, jouée à l'arrivée sur le site -->
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-fog"></div>

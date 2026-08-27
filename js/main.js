@@ -350,6 +350,88 @@
   }
 
   /* -----------------------------------------------------------
+     Filtre d'entrée : le visiteur décline son identité, seul le nom
+     de famille "Arrouasse" donne accès au reste du site.
+  ----------------------------------------------------------- */
+
+  const GATE_SESSION_KEY = 'jaGatePassed';
+  const GATE_SURNAME = 'arrouasse';
+
+  function normalizeName(str) {
+    return str
+      .trim()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '') // enlève les accents
+      .toLowerCase();
+  }
+
+  function initGatekeeper(onPassed) {
+    const gate = document.getElementById('gatekeeper');
+    if (!gate) { onPassed(); return; }
+
+    let alreadyPassed = false;
+    try { alreadyPassed = sessionStorage.getItem(GATE_SESSION_KEY) === '1'; } catch (e) { /* pas grave */ }
+    const skip = params.get('skipgate') === '1';
+
+    if (alreadyPassed || skip) {
+      gate.remove();
+      onPassed();
+      return;
+    }
+
+    body.classList.add('gk-lock');
+
+    const form = document.getElementById('gk-form');
+    const prenomInput = document.getElementById('gk-prenom');
+    const nomInput = document.getElementById('gk-nom');
+    const accepted = document.getElementById('gk-accepted');
+    const acceptedName = document.getElementById('gk-accepted-name');
+    const rejected = document.getElementById('gk-rejected');
+    const continueBtn = document.getElementById('gk-continue');
+    const outBtn = document.getElementById('gk-out');
+    const retryBtn = document.getElementById('gk-retry');
+
+    function showPanel(panel) {
+      [form, accepted, rejected].forEach(p => { p.hidden = (p !== panel); });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const prenom = prenomInput.value.trim();
+      const nom = nomInput.value;
+
+      if (normalizeName(nom) === GATE_SURNAME) {
+        acceptedName.textContent = prenom || '';
+        showPanel(accepted);
+      } else {
+        rejected.classList.remove('gk-shake-once');
+        showPanel(rejected);
+        requestAnimationFrame(() => rejected.classList.add('gk-shake-once'));
+      }
+    });
+
+    continueBtn.addEventListener('click', () => {
+      try { sessionStorage.setItem(GATE_SESSION_KEY, '1'); } catch (e) { /* pas grave */ }
+      gate.classList.add('gk-hide');
+      body.classList.remove('gk-lock');
+      setTimeout(() => gate.remove(), 1100);
+      onPassed();
+    });
+
+    retryBtn.addEventListener('click', () => {
+      nomInput.value = '';
+      showPanel(form);
+      nomInput.focus();
+    });
+
+    outBtn.addEventListener('click', () => {
+      window.close();
+      // La plupart des navigateurs mobiles ignorent window.close() sur un onglet
+      // que l'utilisateur a ouvert lui-même : on referme quand même la porte.
+      setTimeout(() => { window.location.href = 'about:blank'; }, 150);
+    });
+  }
+
+  /* -----------------------------------------------------------
      Animation d'ouverture (brume + cercle Enso) à l'arrivée sur le site.
      Jouée une seule fois par session (sessionStorage) pour ne pas gêner
      un invité qui recharge ou navigue plusieurs fois pendant la soirée.
@@ -485,12 +567,16 @@
      Boot
   ----------------------------------------------------------- */
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function startSite() {
     initIntro();
     initScrollReveal(); // pose les attributs data-observe avant init()
     init();
     initPetalsCanvas();
     initMusic();
     initEasterEgg();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initGatekeeper(startSite);
   });
 })();
